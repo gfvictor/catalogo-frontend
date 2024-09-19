@@ -25,3 +25,7 @@ declare module 'pinia' {
 export function setupPinia(app:App) {
   app.use(createPinia());
 }
+
+const pinia = createPinia();
+
+export default pinia;
