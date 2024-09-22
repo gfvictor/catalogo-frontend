@@ -30,6 +30,10 @@ const handleSubmit = async () => {
     errorMessage.value = axiosError.response?.data?.message || 'Erro ao se registrar.'
   }
 };
+
+const redirectBack = () => {
+  router.push('/login');
+}
 </script>
 
 <template>
@@ -45,6 +49,7 @@ const handleSubmit = async () => {
       class="q-mb-md"
       v-model="form.email"
       label="E-mail"
+      type="email"
       filled
       required
     />
@@ -52,13 +57,21 @@ const handleSubmit = async () => {
       class="q-mb-md"
       v-model="form.password"
       label="Senha"
+      type="password"
       filled
       required
     />
     <q-btn
+      class="q-mb-md"
+      color="primary"
       @click="handleSubmit"
       label="Registrar"
+    />
+    <q-btn
+      class="q-mb-md"
       color="primary"
+      @click="redirectBack"
+      label="Voltar"
     />
     <q-banner v-if="successMessage" class="q-mt-md" color="positive">
       {{ successMessage }}

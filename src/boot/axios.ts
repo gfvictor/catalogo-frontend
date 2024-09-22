@@ -1,3 +1,4 @@
+import { boot } from 'quasar/wrappers';
 import axios, { AxiosInstance } from 'axios';
 
 declare module 'vue' {
@@ -8,7 +9,7 @@ declare module 'vue' {
 }
 
 const api: AxiosInstance = axios.create({
-  baseURL: 'import.meta.env.API_URL',
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -24,4 +25,9 @@ api.interceptors.request.use((config)=> {
   return config
 });
 
-export default api;
+export default boot(({ app }) => {
+  app.config.globalProperties.$axios = axios;
+  app.config.globalProperties.$api = api;
+});
+
+export { api };
